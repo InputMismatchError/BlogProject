@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+{% block content %}
+<center>
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Hey!</strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %} 
+    
+
+<br/>
+<h2>You searched for : <strong> {{ searched }} </strong> </h2>
+<br><br>
+
+{% if posts %}
+{% for post in posts %}
+
+</center>
+<div class="shadow p-3 mb-5 bg-body">
+        
+    
+    Author : <strong>{{post.poster.name}} - {{ post.poster.username }}</strong> 
+    <br>{{post.title}} , ( {{post.slug}} )
+    <br><br> {{post.content | safe}}
+    <br><br>
+    {% if current_user.id == post.id or current_user.id == 33 %}
+    <a href="{{url_for('update_blogpost',id = post.id)}}" class = "btn btn-outline-success">Update Post</a>
+    {% else %}
+    {% endif %}    
+</div>
+
+{%endfor%}
+
+{% else %}
+<div class="shadow p-3 mb-5 bg-body"> 
+    <strong>No results found !</strong> 
+</div>
+{% endif %}
+{% endblock %}

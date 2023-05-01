@@ -1,0 +1,81 @@
+{%extends 'base.html'%}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Hey!</strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+
+<center>
+
+{% if name == None  %}
+<div class="shadow-lg p-3 m-5 bg-body rounded">  
+    <h1>What is Your Name ?</h1>
+    <br/>
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {{form.name.label(class="form-label")}}
+        {{form.name(class="form-control")}}
+    </br>
+        {{form.hidden_tag()}}
+        {{form.feedback.label(class="form-label")}}
+        {{form.feedback(class="form-control")}}
+    </br>    
+        {{form.submit(class="btn btn-secondary")}}
+    </form></div>
+    <br><br><br><br><br><br><br><br><br>
+    <table class="table caption-top"> 
+      <caption><strong><font size="25" style = "font-family: Arial, sans-serif" >List of short feedbacks</font></strong></caption>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Short Feedback</th>
+        </tr>
+      </thead>
+      {% for our_user in our_users %}
+      <tbody>
+        <tr> 
+          <td>{{our_user.name}}</td>
+          <td>{{our_user.feedback}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+
+{% else %}
+   
+    <h1>Hello {{name}}</h1>
+    <br/>
+    <img src="{{url_for('static',filename='images/img.jpg')}}" width=600>
+    <br></br>
+    <p id="demo">This is stuff ... </p>
+    <script src="{{url_for('static',filename='js/myfile.js')}}"></script>
+    
+    <table class="table caption-top">   
+        <caption><strong><font size="25" style = "font-family: Arial, sans-serif" >List of short feedbacks</font></strong></caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Short Feedback</th>
+          </tr>
+        </thead>
+        {% for our_user in our_users %}
+        <tbody>
+          <tr> 
+            <td>{{our_user.name}}</td>
+            <td>{{our_user.feedback}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+
+      
+    
+    
+    
+{% endif %}
+  
+{% endblock %}
+

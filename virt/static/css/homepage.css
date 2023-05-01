@@ -1,0 +1,29 @@
+
+header {
+    height: 600px;
+    background-color: aquamarine;
+    background-image: url('/static/images/background_img.png');
+    background-size: 100%;
+}
+
+header h1{
+    text-align: center;
+    position: relative;
+    top: 25%;
+}
+
+.sign-in {
+    height: 55px;
+    width: 110px;
+    position: relative;
+    top: 35%;
+    left: 38%;
+}
+
+.sign-up {
+    height: 55px;
+    width: 110px;
+    position: relative;
+    top: 35%;
+    left: 46%;
+}

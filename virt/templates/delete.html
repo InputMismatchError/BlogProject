@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Hey! </strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% if current_user.id == user_to_delete.id or current_user.id == 33 %}
+<center>
+
+    <h1>You are no longer with us !! </h1>
+    <br/></center>
+    <table class="table caption-top">   
+      <caption><strong><font size="25" style = "font-family: Arial, sans-serif" >User List :</font></strong></caption>
+      <thead>
+        <tr>
+          <th scope="col">Uniqe İD</th>
+          <th scope="col">Name</th>
+          <th scope="col">Username</th>
+          <th scope="col">E-mail adress</th>
+          <th scope="col">Favorite Color</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>{%for our_user in our_users%}
+      <tbody>
+        <tr>
+          <th>{{our_user.id}}</th>
+          <td>{{our_user.name}}</td>
+          <td>{{our_user.username}}</td>
+          <td>{{our_user.email}}</td>
+          <td>{{our_user.fav_color}}</td>
+          <td><a href="{{url_for('update',id= our_user.id)}}" class="btn btn-outline-success btn-sm">Edit Profile</a></td>
+        </tr> {% endfor %}      
+      </tbody>
+    </table>
+
+
+<br/></br><br/>
+{%else%}
+
+{{redirect(url_for('access_denied.html'))}}
+
+{%endif%}
+
+<center>
+{% endblock %}</center>

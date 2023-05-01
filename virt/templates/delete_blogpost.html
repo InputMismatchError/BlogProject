@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Hey! </strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+
+<center>
+
+    <h1>BlogPost is deleted !</h1>
+    <br/></center>
+<div class="shadow-lg p-3 m-5 bg-body rounded">
+    </div>
+        <strong><font size="25" style = "font-family: Arial, sans-serif">Blog Posts List :</font></strong></center>  
+        <br>
+        {% for post_item in our_users %}
+            <div class="shadow p-3 mb-5 bg-body">
+                
+            
+                <strong>{{post_item.poster.name}}</strong> 
+                <br> {{post_item.title}}  , ( {{post_item.slug}} )
+                <br><br><br>{{post_item.content}}
+                <br><br> <a href="{{url_for('showPost',id = post_item.id)}}" class = "btn btn-outline-secondary btn-sm">View Post</a>
+           
+            </div>
+        {% endfor %}  
+
+
+<br/></br><br/>
+
+
+
+
+<center>
+{% endblock %}</center>

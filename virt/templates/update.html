@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Hey!</strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% if current_user.id == id or current_user.id == 33 %}
+<center>
+
+    <h1>Update Your Profile {{name}} !! </h1>
+    <br/></center>
+<div class="shadow-lg p-3 m-5 bg-body rounded">
+    <form action = "/update/{{name_to_update.id}}" method = "POST" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        {{form.name.label(class="form-label")}}
+        {{form.name(class="form-control", value=name_to_update.name)}}
+    </br>
+        {{form.hidden_tag()}}
+        {{form.username.label(class="form-label")}}
+        {{form.username(class="form-control",value=name_to_update.username)}}
+    </br>
+        {{form.hidden_tag()}}
+        {{form.email.label(class="form-label")}}
+        {{form.email(class="form-control",value=name_to_update.email)}}
+    </br>
+        {{form.hidden_tag()}}
+        {{form.fav_color.label(class="form-label")}}
+        {{form.fav_color(class="form-control", value = name_to_update.fav_color)}}
+    </br>
+        {{form.hidden_tag()}}
+        {{form.profile_pic.label(class="form-label")}}
+        {{form.profile_pic(class="form-control", value = name_to_update.profile_pic)}}
+    </br>
+        {{form.submit(class="btn btn-secondary")}}
+
+        <a href="{{url_for('delete', id = id)}}" class="btn btn-danger">Delete</a>
+    </div></form>
+
+<br/></br><br/>
+{% else %}
+<center>
+<div class="alert alert-primary" role="alert">
+
+    <h1>NO ACCESS !</h1>
+
+<p> You can not edit a profile does not belong to you !</p>
+<p> If it is your profile too, log out and then ,log in to THAT profile .</p>
+</div>
+<a href="{{url_for('logout')}}" class = "btn btn-outline-success btn-lg">Log Out</a>
+
+{%endif%}
+<center>
+{% endblock %}</center>

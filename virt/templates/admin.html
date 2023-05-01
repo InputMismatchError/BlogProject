@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{% block content %}
+<center>
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Hey!</strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %} 
+    
+
+
+
+<div class="alert alert-primary" role="alert">
+
+    <h1>Admin Console</h1>
+
+<p>You look like some kinda ceo-ass person</p>
+
+</div>
+<a href="{{url_for('logout')}}" class = "btn btn-outline-success btn-lg">Log Out</a>
+
+
+
+
+
+<br/></br>
+
+{% endblock %}
