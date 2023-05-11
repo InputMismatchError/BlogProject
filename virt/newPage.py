@@ -30,6 +30,8 @@ login_manager.login_view = 'login'
 
 ckeditor = CKEditor(app)
 
+admin_id = 33
+
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
@@ -99,7 +101,7 @@ def update(id):
             db.session.commit()
             saver.save(os.path.join(app.config['UPLOAD_FOLDER'], pic_name))
             flash("User Updated Successfuly")
-            return redirect(url_for('user_add'))
+            return redirect(url_for('dashboard'))
         except:
             flash("Error, try again!")
             return redirect(url_for('user_add'))
@@ -120,10 +122,6 @@ def user(name):
 def error_page(e):
     return render_template("404.html") , 404
 
-@app.route('/Sadbülhamit')
-def page_sadbülhamit():
-    flash("Meme page , unnecessary but still great.")
-    return render_template('sadbülhamit.html')
 
 @app.route('/feedback', methods = ['GET','POST'])
 def name():
@@ -143,8 +141,7 @@ def name():
         form.name.data = ''
         form.feedback.data = ''
         flash("Feedback is taken, thank you!")
-    our_users = ShortFeedback.query.order_by(ShortFeedback.date_added)
-    return render_template('name.html', name = name , form = form , our_users = our_users) 
+    return render_template('name.html', name = name , form = form) 
 
 @app.route('/user/add', methods = ['GET','POST'])
 def user_add():
@@ -180,9 +177,7 @@ def user_add():
         form.fav_color.data = ''
         form.password_hash.data = ''
         
-
-    our_users = Users.query.order_by(Users.date_added)
-    return render_template('user_add.html' , form = form, name = name , our_users = our_users)
+    return render_template('user_add.html' , form = form, name = name)
 
 @app.route('/delete/<int:id>')
 @login_required
@@ -265,11 +260,23 @@ def postform():
 
     return render_template('add_blogpost.html', form = form, post_items = post_items)
 
-@app.route('/blogposts')
-def blogposts():
+@app.route('/blogposts/pages/<int:page>')
+def blogposts(page):
+
     
+    template = 'blogposts' + str(page) + '.html'
+
+    if page==1000 and (current_user.id == admin_id):
+        template = 'blogpost_all.html'
+    if page == 1:
+        template = 'blogposts.html'
+    if page == 0:
+        template = 'blogposts_left.html'
     post_items = Posts.query.order_by(Posts.date_posted)
-    return render_template('blogposts.html', post_items = post_items)
+
+    a = len(list(post_items))
+
+    return render_template(template, post_items = post_items)
 
 @app.context_processor
 def base():
@@ -279,7 +286,7 @@ def base():
 @app.route('/blogposts/<int:id>')
 def showPost(id):
     post = Posts.query.get_or_404(id)
-    return render_template('post_of_blogposts.html', post = post)
+    return render_template('post_of_blogposts.html', post = post, admin_id=admin_id)
 
 
 
@@ -296,8 +303,7 @@ def update_blogpost(id):
         db.session.commit()
         flash("Post Has Been Updated")
         return redirect(url_for('showPost', id = post.id))
-
-    if current_user.id == post.poster_id :   
+    if current_user.id == post.poster_id or current_user.id == admin_id:   
         form.title.data = post.title
         form.slug.data = post.slug
         form.content.data = post.content
@@ -312,8 +318,8 @@ def delete_blogpost(id):
     form = PostForm()
     our_users = Posts.query.order_by(Posts.date_posted)
     user_id = current_user.id
-    if user_id == user_to_delete.poster.id:
 
+    if user_id == user_to_delete.poster.id or current_user.id == admin_id:
         try:
             db.session.delete(user_to_delete)
             db.session.commit()
@@ -365,7 +371,13 @@ def logout():
 
 def dashboard():
     user = current_user
-    return render_template('dashboard.html',user=user)
+    
+    posts = None
+
+    if Posts.query.filter_by(poster_id = current_user.id) != None:
+        posts = Posts.query.filter_by(poster_id = current_user.id)
+
+    return render_template('dashboard.html',user=user,posts = posts)
 
 @app.route('/search', methods = ['POST'])
 def search():
@@ -389,10 +401,24 @@ def base():
 @login_required
 def admin():
     id = current_user.id
-    if id == 33:
+    if id == admin_id:
         return render_template('admin.html')
     else:
         flash("This account does not belong to an admin !")
         return redirect(url_for('dashboard'))
 
+@app.route('/users_list')
+@login_required
+def users_list():
+    id = current_user.id
+    if id == admin_id:
+        our_users = Users.query.order_by(Users.date_added)
+        return render_template('users_list.html',our_users=our_users)
 
+@app.route('/feedbacks')
+@login_required
+def feedbacks():
+    id = current_user.id 
+    if id == admin_id:
+        our_users = ShortFeedback.query.order_by(ShortFeedback.date_added)
+        return render_template('feedbacks.html', our_users=our_users)

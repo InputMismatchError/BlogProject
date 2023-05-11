@@ -47,32 +47,7 @@
 
 
 <br/></br><br/>
-
-<table class="table caption-top">   
-    <caption><strong><font size="25" style = "font-family: Arial, sans-serif" >User List :</font></strong></caption>
-    <thead>
-      <tr>
-        <th scope="col">Uniqe İD</th>
-        <th scope="col">Name</th>
-        <th scope="col">Username</th>
-        <th scope="col">E-mail adress</th>
-        <th scope="col">Favorite Color</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>{%for our_user in our_users%}
-    <tbody>
-      <tr>
-        <th>{{our_user.id}}</th>
-        <td>{{our_user.name}}</td>
-        <td>{{our_user.username}}</td>
-        <td>{{our_user.email}}</td>
-        <td>{{our_user.fav_color}}</td>
-        <td><a href="{{url_for('update',id= our_user.id)}}" class="btn btn-outline-success btn-sm">Edit Profile</a></td>
-      </tr> {% endfor %}      
-    </tbody>
-  </table>
   
- 
 
 <center>
 {% endblock %}</center>

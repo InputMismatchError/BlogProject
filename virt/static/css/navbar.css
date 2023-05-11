@@ -1,0 +1,119 @@
+body{
+  padding: 0px;
+  margin: 0px;
+  background-color: #D9D9D9;
+}
+.btn{
+  padding: 7px;
+  margin-left: 10px;
+  background-color: #2f7b94;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 5px;
+
+}
+.btn:hover{
+  background-color: #63b0ca;
+  transition: 0.5s;
+
+}
+
+header{
+  background-color:#2f7b94;
+  height: 66px;
+} 
+header * {
+  color: white;
+}
+.clearfix::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+header .logo{
+  float: left;
+  
+}
+header ul{
+  float: right;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+
+
+
+}
+header ul li {
+  float: left;
+  position: relative;
+}
+header ul li a {
+  float: left;
+  display: block;
+  padding: 21px;
+  font-size: 1.1em;
+  text-decoration: none;
+}
+header ul li a:hover {
+  background-color: #4490aa;
+  transition: 0.5s;
+}
+
+
+header ul li{
+  float: left;
+}
+.content{
+  width:90%;
+  margin: 0.5px auto 30px;
+  height: 60px;
+
+
+}
+.content .main-content{
+  width: 100%;
+  float: left;
+  height: 310px;
+
+
+}
+.content .main-content .recent-post-title{
+  margin-left: 36px;
+  color: #302f2f
+
+}
+
+.content .main-content .post{
+  width: 95%;
+  height:210px;
+  margin : 10px auto;
+  border-radius:10px;
+  background: white;
+  
+}
+.content .main-content .post .content-title{
+  font-size: 24px;
+  margin-left:10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  color: #2f7b94;
+}
+.content .main-content .post .user{
+  font-size: 16px;
+  color: #2f7b94;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.content .main-content .post .post-date{
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 14px;
+  color:#000000 ;
+}
+.content .main-content .post .content-info{
+  margin-left: 10px ;
+  margin-top: 10px;
+  margin-bottom: 24px;
+
+}

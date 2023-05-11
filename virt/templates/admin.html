@@ -17,14 +17,60 @@
     <h1>Admin Console</h1>
 
 <p>You look like some kinda ceo-ass person</p>
-
 </div>
-<a href="{{url_for('logout')}}" class = "btn btn-outline-success btn-lg">Log Out</a>
+
+<div class="container text-center">
+    <div class="row align-items-start">
+      <div class="col">
+        
+        <div class="card" style="width: 18rem;">
+            <img src="{{url_for('static',filename='images/users_image.png')}}" ><br><br>
+            <div class="card-body">
+              <center>
+                <p> Access List of Users of this Website!</p>
+            <br>
+                <a href="{{url_for('users_list')}}" class="btn btn-success">Users List</a>
+            </div>
+          </div>
+
+      </div>
+      <div class="col">
+        
+        <div class="card" style="width: 18rem;">
+            <img src="{{url_for('static',filename='images/feedback_image.png')}}"><br><br>
+            <div class="card-body">
+              <center>
+                <p> Access List of Feedbacks of this Website get !</p>
+                <a href="{{url_for('users_list')}}" class="btn btn-success">Feedbacks</a>
+            </div>
+          </div>
+
+      </div>
+      <div class="col">
+        
+        <div class="card" style="width: 18rem;">
+            <img src="{{url_for('static',filename='images/developer_image.png')}}" height="335"><br>
+            <div class="card-body">
+              <center>
+                <p> Edit the Blogposts </p>
+                <a href="{{url_for('blogposts',page=1000)}}" class="btn btn-success">Blogposts</a>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
 
 
 
 
 
 <br/></br>
+
+
+
 
 {% endblock %}

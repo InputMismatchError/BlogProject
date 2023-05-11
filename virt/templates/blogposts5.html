@@ -4,10 +4,10 @@
 <center>  
 <strong><font size="25" style = "font-family: Arial, sans-serif" >Blog Posts List :</font></strong></center>  
 <br>
-{% for post_item in post_items [0:3] %}
+{% for post_item in post_items [12:15] %}
     <div class="shadow p-3 mb-5 bg-body">
         
-      
+    
         <h4><strong>{{post_item.title}}</strong></h4> 
         <h6>by {{post_item.poster.name}}</h6><br>
         <h6>{{post_item.poster.date_added}}</h6><br>
@@ -20,10 +20,11 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 1)}}">1</a></li>
-      <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 2)}}">2</a></li>
-      <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 3)}}">3</a></li>
+        <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 4)}}">4</a></li>
+        <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 5)}}">5</a></li>
+        <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 6)}}">6</a></li>
+        <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 0)}}">Next</a></li>
     </ul>
-  </nav>
+</nav>
 
 {% endblock %}

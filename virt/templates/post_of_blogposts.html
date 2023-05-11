@@ -7,22 +7,20 @@
   </div>
 {% endfor %}
 <center>  
-<strong><font size="25" style = "font-family: Arial, sans-serif" >Blog Posts List :</font></strong></center>  
+<strong><font size="25" style = "font-family: Arial, sans-serif" ><strong>{{post.title}}</strong> </font></strong>
+<br>by {{post.poster.name}}<br>{{post.poster.date_added}}<br></center>  
 <br>
     <div class="shadow p-3 mb-5 bg-body">
         
-    
-        <h4><strong>{{post.title}}</strong></h4> 
-        <h12>by {{post.poster.name}}</h12><br>
-        <h20>{{post.poster.date_added}}</h20><br>
-        <br><br>{{post.content | safe }} 
-        <br><br>
-        {% if current_user.id == post.poster.id %}
-        <a href="{{url_for('update_blogpost',id = post.id)}}" class = "btn btn-outline-success">Update Post</a>
-        {% else %}
-        {% endif%}    
+    {{post.content | safe }} 
+    <br><br><br><br><br><br><br>
+            
     </div>
-    <a href="{{url_for('blogposts')}}" class="btn btn-secondary ">Back to blogposts</a>
+    {% if current_user.id == post.poster_id or current_user.id == admin_id %}
+        <a href="{{url_for('update_blogpost',id = post.id)}}" class = "btn btn-success">Update Post</a>
+        {% else %}
+        {% endif%}
+    <a href="{{url_for('blogposts',page=1)}}" class="btn btn-secondary ">Back to blogposts</a>
 
 
 {% endblock %}

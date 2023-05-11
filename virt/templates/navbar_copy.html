@@ -1,0 +1,47 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MEF BLOG</title>
+  <link href="{{url_for('static', filename='css/navbar.css')}}" rel="stylesheet"/>
+</head>
+<body>
+  <header>
+    <div class ="logo">
+      <img class="logo" src="{{url_for('static', filename='images/blog_logo.jpeg')}}" width = "66px" height="66px " alt="logo">
+    </div>
+    <ul class="nav">
+      <li><a href="{{url_for('index')}}">Home</a></li>
+      <li><a href="{{url_for('blogposts',page=1)}}">BlogPosts</a></li>
+      <li><a href="{{url_for('name')}}">Give Feedback</a></li>
+      {% if not current_user.is_authenticated %}
+      <li><a href="{{url_for('user_add')}}">Sign Up</a></li>
+      {%else%}
+      {%endif%}
+      {% if current_user.id == 33 %}
+      <li><a href="{{url_for('admin')}}">Admin Page</a></li>
+      {%else%}
+      {%endif%}
+      {% if current_user.is_authenticated %}
+      <li><a href="{{url_for('dashboard')}}">Dashboard</a></li>
+      <li><a href="{{url_for('logout')}}">Logout</a></li>
+      {%else%}
+      <li><a href="{{url_for('login')}}">Log In</a></li>
+      {%endif%}
+      {% if (url == '/blogposts') or (url == '/search') %}
+      <form method ="POST" action="{{url_for('search')}}" class="d-flex">
+        {{ form.hidden_tag() }}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search", name="searched">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </form>
+      {% else %}
+      {% endif %}
+    </ul>
+  </header>
+
+  
+
+</body>
+</html>

@@ -26,23 +26,7 @@
         {{form.submit(class="btn btn-secondary")}}
     </form></div>
     <br><br><br><br><br><br><br><br><br>
-    <table class="table caption-top"> 
-      <caption><strong><font size="25" style = "font-family: Arial, sans-serif" >List of short feedbacks</font></strong></caption>
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Short Feedback</th>
-        </tr>
-      </thead>
-      {% for our_user in our_users %}
-      <tbody>
-        <tr> 
-          <td>{{our_user.name}}</td>
-          <td>{{our_user.feedback}}</td>
-        </tr>
-        {%endfor%}
-      </tbody>
-    </table>
+    
 
 {% else %}
    
@@ -53,27 +37,7 @@
     <p id="demo">This is stuff ... </p>
     <script src="{{url_for('static',filename='js/myfile.js')}}"></script>
     
-    <table class="table caption-top">   
-        <caption><strong><font size="25" style = "font-family: Arial, sans-serif" >List of short feedbacks</font></strong></caption>
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Short Feedback</th>
-          </tr>
-        </thead>
-        {% for our_user in our_users %}
-        <tbody>
-          <tr> 
-            <td>{{our_user.name}}</td>
-            <td>{{our_user.feedback}}</td>
-          </tr>
-          {%endfor%}
-        </tbody>
-      </table>
-
-      
-    
-    
+  
     
 {% endif %}
   
