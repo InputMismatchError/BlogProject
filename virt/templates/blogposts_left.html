@@ -18,11 +18,11 @@
     
 {% endfor %}  
 
-<nav aria-label="Page navigation example">
+
     <ul class="pagination">
         <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 1)}}">Go back to beginning</a></li>
         <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 6)}}">Previous</a></li>
     </ul>
-</nav>
+
 
 {% endblock %}

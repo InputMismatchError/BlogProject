@@ -1,16 +1,17 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MEF BLOG</title>
-  <link href="{{url_for('static', filename='css/navbar.css')}}" rel="stylesheet"/>
+  <link href="{{url_for('static', filename='css/blogposts.css')}}" rel="stylesheet"/>
 </head>
 <body>
-  <header>
-    <div class ="logo">
-      <img class="logo" src="{{url_for('static', filename='images/blog_logo.jpeg')}}" width = "66px" height="66px " alt="logo">
+  <nav>
+    <div class="logo">
+    <a href="{{url_for('index')}}">
+      <img class="logo" src="{{url_for('static', filename='images/logo.jpeg')}}" width = "66px" height="66px " alt="logo"></a>
     </div>
     <ul class="nav">
       <li><a href="{{url_for('index')}}">Home</a></li>
@@ -21,7 +22,19 @@
       {%else%}
       {%endif%}
       {% if current_user.id == 33 %}
-      <li><a href="{{url_for('admin')}}">Admin Page</a></li>
+      <li><a href="{{url_for('admin')}}">Admin Page</a>
+        <ul>
+          <li>
+            <a href="#">List Of Feedbacks</a>
+          </li>
+          <li>
+            <a href="#">List Of Users</a>
+          </li>
+          <li>
+            <a href="#">Developer Name</a>
+          </li>
+        </ul>
+      </li>
       {%else%}
       {%endif%}
       {% if current_user.is_authenticated %}
@@ -39,7 +52,7 @@
       {% else %}
       {% endif %}
     </ul>
-  </header>
+  </nav>
 
   
 

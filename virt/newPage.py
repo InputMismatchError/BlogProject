@@ -9,6 +9,7 @@ from flask_ckeditor import CKEditor
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import os
+
 # safe , capitalize , lower , upper , title , trim , striptags
 
 app = Flask(__name__)
@@ -112,7 +113,7 @@ def update(id):
 @app.route('/')
 def index():
     
-    return render_template("index.html")
+    return render_template("index_copy.html")
 
 @app.route('/user/<name>')
 def user(name):

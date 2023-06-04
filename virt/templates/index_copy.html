@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogPost</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{url_for('static',filename='css/homepage.css')}}">
+  </head>
+  <body>
+    <nav>
+      <div class ="logo">
+        <img class="logo" src="{{url_for('static', filename='images/logo.jpeg')}}" width = "66px" height="66px " alt="logo">
+      </div>
+      <ul class="nav">
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="{{url_for('blogposts',page=1)}}">BlogPosts</a></li>
+        <li><a href="{{url_for('name')}}">Give Feedback</a></li>
+        {% if not current_user.is_authenticated %}
+        <li><a href="{{url_for('user_add')}}">Sign Up</a></li>
+        {%else%}
+        {%endif%}
+        {% if current_user.id == 33 %}
+        <li><a href="{{url_for('admin')}}">Admin Page</a></li>
+        {%else%}
+        {%endif%}
+        {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('dashboard')}}">Dashboard</a></li>
+        <li><a href="{{url_for('logout')}}">Logout</a></li>
+        {%else%}
+        <li><a href="{{url_for('login')}}">Log In</a></li>
+        {%endif%}
+        {% if (url == '/blogposts') or (url == '/search') %}
+        <form method ="POST" action="{{url_for('search')}}" class="d-flex">
+          {{ form.hidden_tag() }}
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search", name="searched">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+        {% else %}
+        {% endif %}
+      </ul>
+    </nav>
+      <header>
+        <div class="navbar_">
+          
+        </div>
+
+        <div class="heading">
+          <h1>Create your Blog Posts You Always Imagined</h1>
+          <div class="buttons">
+            {% if current_user.is_authenticated %}
+            <a class="btn sign-in" href="{{url_for('blogposts',page=1)}}">Blogposts</a>
+            <a class="btn sign-up" href="{{url_for('postform')}}">Add Post</a>
+            {%else%}
+            <a class="btn sign-in" href="{{url_for('login')}}">Sign In</a>
+            <a class="btn sign-up" href="{{url_for('user_add')}}">Sign Up</a>
+            {%endif%}
+          </div>
+        </div>
+      </header>
+
+      <section class="info-card share">
+        <div class="info-text">
+          <p>Enjoy sharing your thoughts in any topic you want and discussing with other people.</p>
+        </div>
+        <div class="info-img">
+          <img src="{{url_for('static',filename='images/homepage_image0.jpeg')}}" alt="img">
+        </div>
+      </section>
+
+      <section class="info-card second">
+        <div class="info-img">
+          <img src="{{url_for('static',filename='images/homepage_image1.jpeg')}}" alt="img">
+        </div>
+        <div class="info-text">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non posuere sapien. Donec non lectus sollicitudin</p>
+        </div>
+      </section>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+  <center>
+    <p><strong> Contacts: Hamza Gözükara - gozukarah@mef.edu.tr </strong></center>
+</html>

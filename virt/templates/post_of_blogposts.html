@@ -10,12 +10,17 @@
 <strong><font size="25" style = "font-family: Arial, sans-serif" ><strong>{{post.title}}</strong> </font></strong>
 <br>by {{post.poster.name}}<br>{{post.poster.date_added}}<br></center>  
 <br>
-    <div class="shadow p-3 mb-5 bg-body">
-        
-    {{post.content | safe }} 
-    <br><br><br><br><br><br><br>
-            
+    <div class="shadow p-3 mb-5 bg-body">      
+
+    <div class="card">
+        <div class="card-body">
+            {{post.content | safe }} 
+        </div>
+      </div>
     </div>
+    
+            
+
     {% if current_user.id == post.poster_id or current_user.id == admin_id %}
         <a href="{{url_for('update_blogpost',id = post.id)}}" class = "btn btn-success">Update Post</a>
         {% else %}

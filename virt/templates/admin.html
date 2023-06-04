@@ -23,7 +23,7 @@
     <div class="row align-items-start">
       <div class="col">
         
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem; height: 32rem;">
             <img src="{{url_for('static',filename='images/users_image.png')}}" ><br><br>
             <div class="card-body">
               <center>
@@ -36,23 +36,25 @@
       </div>
       <div class="col">
         
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;height: 32rem;">
             <img src="{{url_for('static',filename='images/feedback_image.png')}}"><br><br>
             <div class="card-body">
               <center>
                 <p> Access List of Feedbacks of this Website get !</p>
-                <a href="{{url_for('users_list')}}" class="btn btn-success">Feedbacks</a>
+                <br>
+                <a href="{{url_for('feedbacks')}}" class="btn btn-success">Feedbacks</a>
             </div>
           </div>
 
       </div>
       <div class="col">
         
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;height: 32rem;">
             <img src="{{url_for('static',filename='images/developer_image.png')}}" height="335"><br>
             <div class="card-body">
               <center>
                 <p> Edit the Blogposts </p>
+                <br>
                 <a href="{{url_for('blogposts',page=1000)}}" class="btn btn-success">Blogposts</a>
             </div>
           </div>

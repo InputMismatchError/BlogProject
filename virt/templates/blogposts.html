@@ -2,7 +2,7 @@
 {% block content %}
 
 <center>  
-<strong><font size="25" style = "font-family: Arial, sans-serif" >Blog Posts List :</font></strong></center>  
+<strong><font size="25" style = "font-family: Arial, sans-serif" >Blog Posts</font></strong> <br><br> <a href="{{url_for('postform')}}" class = "btn btn-outline-secondary btn-sm">Add Post</a></center>  
 <br>
 {% for post_item in post_items [0:3] %}
     <div class="shadow p-3 mb-5 bg-body">
@@ -18,12 +18,14 @@
     
 {% endfor %}  
 
-<nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 1)}}">1</a></li>
       <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 2)}}">2</a></li>
       <li class="page-item"><a class="page-link" href="{{url_for('blogposts',page = 3)}}">3</a></li>
     </ul>
-  </nav>
+
 
 {% endblock %}
+
+
+

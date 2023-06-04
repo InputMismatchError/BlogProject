@@ -18,11 +18,17 @@ body{
 
 }
 
-header{
+
+.clearfix::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+nav{
   background-color:#2f7b94;
   height: 66px;
 } 
-header * {
+nav * {
   color: white;
 }
 .clearfix::after{
@@ -31,38 +37,61 @@ header * {
   clear: both;
 }
 
-header .logo{
+nav .logo{
   float: left;
   
 }
-header ul{
+nav ul{
   float: right;
   margin: 0px;
   padding: 0px;
   list-style: none;
 
 
-
 }
-header ul li {
+nav ul li {
   float: left;
   position: relative;
 }
-header ul li a {
+
+
+
+nav ul li a {
   float: left;
   display: block;
   padding: 21px;
   font-size: 1.1em;
   text-decoration: none;
 }
-header ul li a:hover {
+nav ul li a:hover {
   background-color: #4490aa;
   transition: 0.5s;
 }
 
 
-header ul li{
+nav ul li{
   float: left;
+  position: relative;
+}
+nav ul li ul{
+  position: absolute;
+  top: 66px;
+  right:0px;
+  width:130px;
+  display: none;
+
+}
+nav ul li:hover ul{
+  display: block;
+}
+
+nav ul li ul li a{
+  padding: 21px;
+  background: #2f7b94;
+  color:white;
+}
+nav ul li ul li a:hover{
+  background-color:#63b0ca
 }
 .content{
   width:90%;
