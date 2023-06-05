@@ -21,36 +21,17 @@
       <li><a href="{{url_for('user_add')}}">Sign Up</a></li>
       {%else%}
       {%endif%}
-      {% if current_user.id == 33 %}
-      <li><a href="{{url_for('admin')}}">Admin Page</a>
-        <ul>
-          <li>
-            <a href="#">List Of Feedbacks</a>
-          </li>
-          <li>
-            <a href="#">List Of Users</a>
-          </li>
-          <li>
-            <a href="#">Developer Name</a>
-          </li>
-        </ul>
-      </li>
-      {%else%}
-      {%endif%}
+      {% if current_user.id == admin_id %}
+        <li><a href="{{url_for('admin')}}">Admin Page</a></li>
+        {%else%}
+        {%endif%}
       {% if current_user.is_authenticated %}
       <li><a href="{{url_for('dashboard')}}">Dashboard</a></li>
       <li><a href="{{url_for('logout')}}">Logout</a></li>
       {%else%}
       <li><a href="{{url_for('login')}}">Log In</a></li>
       {%endif%}
-      {% if (url == '/blogposts') or (url == '/search') %}
-      <form method ="POST" action="{{url_for('search')}}" class="d-flex">
-        {{ form.hidden_tag() }}
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search", name="searched">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
-      </form>
-      {% else %}
-      {% endif %}
+      
     </ul>
   </nav>
 

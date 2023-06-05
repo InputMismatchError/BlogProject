@@ -105,13 +105,13 @@ def update(id):
             flash("Error, try again!")
             return redirect(url_for('user_add'))
     else:       
-        return render_template('update.html', name_to_update = name_to_update , form = form,id=id)
+        return render_template('update.html', name_to_update = name_to_update , form = form,id=id,admin_id=admin_id)
     
     
 @app.route('/')
 def index():
     
-    return render_template("index_copy.html")
+    return render_template("index_copy.html" , admin_id=admin_id)
 
 @app.route('/user/<name>')
 def user(name):
@@ -140,7 +140,7 @@ def name():
         form.name.data = ''
         form.feedback.data = ''
         flash("Feedback is taken, thank you!")
-    return render_template('name.html', name = name , form = form) 
+    return render_template('name.html', name = name , form = form,admin_id=admin_id) 
 
 @app.route('/user/add', methods = ['GET','POST'])
 def user_add():
@@ -176,7 +176,7 @@ def user_add():
         form.fav_color.data = ''
         form.password_hash.data = ''
         
-    return render_template('user_add.html' , form = form, name = name)
+    return render_template('user_add.html' , form = form, name = name,admin_id=admin_id)
 
 @app.route('/delete/<int:id>')
 @login_required
@@ -193,14 +193,16 @@ def delete(id):
         form = form, 
         name = name, 
         our_users = our_users,
-        user_to_delete = user_to_delete)
+        user_to_delete = user_to_delete,
+        admin_id=admin_id)
     except:
         flash("An error has accured, try again !")
         return render_template('delete.html', 
         form = form, 
         name = name, 
         our_users = our_users,
-        user_to_delete = user_to_delete)
+        user_to_delete = user_to_delete,
+        admin_id=admin_id)
 
 @app.route('/test_pw',methods=['GET','POST'])
 def test_pw():
@@ -227,7 +229,8 @@ def test_pw():
     password=password, 
     pw_to_check=pw_to_check,  
     passed=passed, 
-    form=form   
+    form=form ,
+    admin_id=admin_id  
     ) 
 
 @app.route('/date')
@@ -257,7 +260,7 @@ def postform():
         return redirect(url_for('blogposts', page=1))
     post_items = Posts.query.order_by(Posts.date_posted)
 
-    return render_template('add_blogpost.html', form = form, post_items = post_items)
+    return render_template('add_blogpost.html', form = form, post_items = post_items,admin_id=admin_id)
 
 @app.route('/blogposts/pages/<int:page>')
 def blogposts(page):
@@ -275,7 +278,7 @@ def blogposts(page):
 
     a = len(list(post_items))
 
-    return render_template(template, post_items = post_items)
+    return render_template(template, post_items = post_items,admin_id=admin_id)
 
 @app.context_processor
 def base():
@@ -306,9 +309,9 @@ def update_blogpost(id):
         form.title.data = post.title
         form.slug.data = post.slug
         form.content.data = post.content
-        return render_template('update_blogpost.html',form = form,post= post)
+        return render_template('update_blogpost.html',form = form,post= post,admin_id=admin_id)
     else :
-        return render_template('access_denied.html')    
+        return render_template('access_denied.html',admin_id=admin_id)    
 
 @app.route('/delete_blogpost/<int:id>')
 @login_required
@@ -325,20 +328,20 @@ def delete_blogpost(id):
             flash("Blogpost deleted successfully ! ")
             return render_template('delete_blogpost.html' , 
             form = form,  
-            our_users = our_users)
+            our_users = our_users,admin_id=admin_id)
         except:
             flash("An error has accured, try again !")
             return render_template('delete_blogpost.html', 
             form = form, 
-            our_users = our_users)
+            our_users = our_users,admin_id=admin_id)
     else:
-        return render_template('access_denied.html')
+        return render_template('access_denied.html',admin_id=admin_id)
 
 @app.route('/check/<int:id>', methods=['GET','POST'])
 
 @app.route('/access_denied')
 def access_denied():
-    return render_template('access_denied.html')
+    return render_template('access_denied.html',admin_id=admin_id)
 
 @app.route('/log_in', methods = ['GET','POST'])
 def login():
@@ -356,14 +359,14 @@ def login():
                 flash("Wrong email/password, try again !")
         else:
             flash("That user does not exits")
-    return render_template('login.html',form = form)
+    return render_template('login.html',form = form,admin_id=admin_id)
 
 @app.route('/log_out', methods=['GET','POST'])
 @login_required
 def logout():
     logout_user()
     flash("You have been logged out !")
-    return redirect(url_for('login'))
+    return redirect(url_for('login',admin_id=admin_id))
 
 @app.route('/dashboard', methods = ['GET','POST'])
 @login_required
@@ -376,7 +379,7 @@ def dashboard():
     if Posts.query.filter_by(poster_id = current_user.id) != None:
         posts = Posts.query.filter_by(poster_id = current_user.id)
 
-    return render_template('dashboard.html',user=user,posts = posts)
+    return render_template('dashboard.html',user=user,posts = posts,admin_id=admin_id)
 
 @app.route('/search', methods = ['POST'])
 def search():
@@ -386,7 +389,7 @@ def search():
         post_searched = form.searched.data
         posts = posts.filter(Posts.content.like('%' + post_searched + '%'))
         posts = posts.order_by(Posts.title).all()
-        return render_template('search.html', form = form , searched = post_searched , posts = posts)
+        return render_template('search.html', form = form , searched = post_searched , posts = posts,admin_id=admin_id)
     else:
         return redirect('blogposts')
         
@@ -401,7 +404,7 @@ def base():
 def admin():
     id = current_user.id
     if id == admin_id:
-        return render_template('admin.html')
+        return render_template('admin.html',admin_id=admin_id)
     else:
         flash("This account does not belong to an admin !")
         return redirect(url_for('dashboard'))
@@ -412,7 +415,7 @@ def users_list():
     id = current_user.id
     if id == admin_id:
         our_users = Users.query.order_by(Users.date_added)
-        return render_template('users_list.html',our_users=our_users)
+        return render_template('users_list.html',our_users=our_users,admin_id=admin_id)
 
 @app.route('/feedbacks')
 @login_required
@@ -420,4 +423,4 @@ def feedbacks():
     id = current_user.id 
     if id == admin_id:
         our_users = ShortFeedback.query.order_by(ShortFeedback.date_added)
-        return render_template('feedbacks.html', our_users=our_users)
+        return render_template('feedbacks.html', our_users=our_users,admin_id=admin_id)

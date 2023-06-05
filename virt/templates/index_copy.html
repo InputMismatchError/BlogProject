@@ -29,7 +29,7 @@
         <li><a href="{{url_for('user_add')}}">Sign Up</a></li>
         {%else%}
         {%endif%}
-        {% if current_user.id == 33 %}
+        {% if current_user.id == admin_id %}
         <li><a href="{{url_for('admin')}}">Admin Page</a></li>
         {%else%}
         {%endif%}

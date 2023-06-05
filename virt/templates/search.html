@@ -25,7 +25,7 @@
     <br>{{post.title}} , ( {{post.slug}} )
     <br><br> {{post.content | safe}}
     <br><br>
-    {% if current_user.id == post.id or current_user.id == 33 %}
+    {% if current_user.id == post.id or current_user.id == admin_id %}
     <a href="{{url_for('update_blogpost',id = post.id)}}" class = "btn btn-outline-success">Update Post</a>
     {% else %}
     {% endif %}    

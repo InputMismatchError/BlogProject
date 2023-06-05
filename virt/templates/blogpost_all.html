@@ -2,7 +2,9 @@
 {% block content %}
 
 <center>  
-<strong><font size="25" style = "font-family: Arial, sans-serif" >Blog Posts </font></strong></center>  
+<strong><font size="25" style = "font-family: Arial, sans-serif" >Blog Posts </font></strong><br><br> <a href="{{url_for('postform')}}" class = "btn btn-outline-secondary btn-sm">Add Post</a></center>  
+<br>
+</center>  
 <br>
 {% for post_item in post_items %}
     <div class="shadow p-3 mb-5 bg-body">
