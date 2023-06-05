@@ -18,8 +18,6 @@ app.config['SECRET_KEY'] = "password"
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__))+'\static\images') # Assigns upload path to variable
 os.makedirs(UPLOAD_FOLDER,exist_ok=True)
-
-#UPLOAD_FOLDER = 'virt/static/images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
@@ -256,7 +254,7 @@ def postform():
         db.session.add(post)
         db.session.commit()
         flash("Blog Post Submitted Succesfully !")
-    
+        return redirect(url_for('blogposts', page=1))
     post_items = Posts.query.order_by(Posts.date_posted)
 
     return render_template('add_blogpost.html', form = form, post_items = post_items)
